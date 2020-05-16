@@ -1,8 +1,14 @@
-# Secret Hilter
+- voice / visual cue
+- choose card to select instead of discard
+- extra modal
+- remove show/hide
+- history
+
+# Discrete Adolf
 
 http://www.secrethitler.party
 
-Secret Hitler for mobile devices.
+Discrete Adolf for mobile devices.
 
 ### Disclaimer
 
@@ -12,7 +18,7 @@ The game and rules are not mine. All taken from the actual board game "Secret Hi
 
 Secret Hilter was created by Mike Boxleiter, Tommy Maranges, Max Temkin, and Mac Schubert
 
-I built this web app, Secret Hitler as a Meteor.js learning project. Uses MongoDB and Handlebars
+I built this web app, Discrete Adolf as a Meteor.js learning project. Uses MongoDB and Handlebars
 
 [Official Rules](http://www.secrethitler.com/assets/Secret_Hitler_Rules.pdf)
 
@@ -24,29 +30,30 @@ Lobby View / Seating View / Game View
 
 ## Technology
 
-  - MeteorJS
-  - Handlebars
-  - MongoDB
-  - app deployed on Heroku
+- MeteorJS
+- Handlebars
+- MongoDB
+- app deployed on Heroku
 
 ### Cron used to clean up Database (remove inactive Rooms and Players)
+
 ```js
-  function cleanUpDatabase() {
-    // remove old rooms and players
-    let cutOffTime = moment().subtract(8, 'hours').toDate().getTime();
+function cleanUpDatabase() {
+  // remove old rooms and players
+  let cutOffTime = moment().subtract(8, 'hours').toDate().getTime();
 
-    let numRoomsRemoved = Rooms.remove({
-      createdAt: {$lt: cutOffTime}
-    });
+  let numRoomsRemoved = Rooms.remove({
+    createdAt: { $lt: cutOffTime },
+  });
 
-    let numPlayersRemoved = Players.remove({
-      createdAt: {$lt: cutOffTime}
-    });
-  }
+  let numPlayersRemoved = Players.remove({
+    createdAt: { $lt: cutOffTime },
+  });
+}
 
-  // Cron Job to remove old rooms and players
-  let MyCron = new Cron(60000);
-  MyCron.addJob(5, cleanUpDatabase);
+// Cron Job to remove old rooms and players
+let MyCron = new Cron(60000);
+MyCron.addJob(5, cleanUpDatabase);
 ```
 
 <!-- ## Experience while building the app
